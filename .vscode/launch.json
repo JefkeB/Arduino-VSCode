@@ -18,11 +18,12 @@
             ],
             "device": "STM32F103C8",
             "configFiles": [
-                "interface/stlink-v2.cfg",
+                "interface/stlink-v2-1.cfg",
                 "target/stm32f1x.cfg"
             ],
             "showDevDebugOutput": false,
-            "internalConsoleOptions": "openOnSessionStart",                    
+            "internalConsoleOptions": "openOnSessionStart",     
+            "svdFile": "${workspaceFolder}/svd/${config:cortex.device}.svd",               
         }
     ]
 }
