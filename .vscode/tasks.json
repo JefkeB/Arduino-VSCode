@@ -4,7 +4,10 @@
         {
             "label": "build",
             "type": "shell",
-            "command": "make",            
+            "command": "make",    
+            "args": [                
+                "-j${env:NUMBER_OF_PROCESSORS}"
+            ],
             "group": {
                 "kind": "build",
                 "isDefault": true
