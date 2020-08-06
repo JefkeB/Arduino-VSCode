@@ -3,7 +3,11 @@
 #
 
 BASE = D:/Dev-Tools/Arduino_Core_STM32
+CMSIS_BASE = D:/Dev-Tools/CMSIS_5
 STLINK = D:/Dev-Tools/stlink-1.3.0-win64
+
+BASE = /home/jef/Work/arduino/stm32/Arduino_Core_STM32
+CMSIS_BASE = /home/jef/Work/arduino/stm32/CMSIS_5
 
 # for a list of boards, see: $(BASE)/variants
 
@@ -31,7 +35,7 @@ ARDUINO = $(CORE)/arduino
 VARIANT = $(BASE)/variants/$(BOARD)
 LIBDIR = $(BASE)/libraries
 HALBASE = $(BASE)/system/Drivers/$(FAMILY)_HAL_Driver
-CMSIS = D:/Dev-Tools/CMSIS_5/CMSIS/Core/Include
+CMSIS = $(CMSIS_BASE)/CMSIS/Core/Include
 
 export proefje=/usr/local/demo
 
@@ -104,8 +108,8 @@ ASMOBJ = $(OBJDIR)/$(startup).o
 INC = \
 -I$(ARDUINO) \
 -I$(ARDUINO)/stm32 \
--I$(ARDUINO)/stm32\LL \
--I$(ARDUINO)/stm32\usb \
+-I$(ARDUINO)/stm32/LL \
+-I$(ARDUINO)/stm32/usb \
 -I$(BASE)/system/Drivers/CMSIS/Device/ST/$(FAMILY)/Include \
 -I$(BASE)/system/Drivers/CMSIS/Include \
 -I$(BASE)/system/Drivers/$(FAMILY)_HAL_Driver/Src \
@@ -192,13 +196,13 @@ $(CPPOBJS):
 
 $(LIBOBJS):
 	$(eval LIBNAME := $(basename $(notdir $@)))
-	$(eval SOURCE := $(patsubst $(OBJDIR)/lib/%.o, $(LIBDIR)/$(LIBNAME)/Src/%.cpp, $@))
+	$(eval SOURCE := $(patsubst $(OBJDIR)/lib/%.o, $(LIBDIR)/$(LIBNAME)/src/%.cpp, $@))
 	@test -d $(dir $@) || mkdir -p $(dir $@)
 	@echo compiling $(SOURCE)
 	$(VERBOSE) $(CXX) $(CXXFLAGS) $(DEFINES) $(INC) -o $@ $(SOURCE)
 
 $(LIBOBJSC):
-	$(eval SOURCE := $(patsubst $(OBJDIR)/lib/%.o, $(LIBDIR)/Wire/Src/utility/%.c, $@))
+	$(eval SOURCE := $(patsubst $(OBJDIR)/lib/%.o, $(LIBDIR)/Wire/src/utility/%.c, $@))
 	@test -d $(dir $@) || mkdir -p $(dir $@)
 	@echo compiling $(SOURCE)
 	$(VERBOSE) $(CC) $(CCFLAGS) $(DEFINES) $(INC) -o $@ $(SOURCE)
