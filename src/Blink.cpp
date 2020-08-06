@@ -23,3 +23,15 @@ void loop()
     delay(100);
     printf("Count value: %d\n", cnt++);
 }
+
+
+// This function prevents that the compilation ends with next error message
+// "undefined reference to `std::__throw_bad_function_call()'"
+// TODO: find out how to do this better
+//
+namespace std {
+    void __throw_bad_function_call() {
+        Serial.println(F("STL ERROR - __throw_bad_function_call"));
+        __builtin_unreachable();
+    }
+}
