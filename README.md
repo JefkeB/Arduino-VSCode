@@ -42,6 +42,7 @@ D:\Dev-Tools
 
 ### Arduino_Core_STM32
 Download the zip from [Github -> Arduino_Core_STM32](https://github.com/stm32duino/Arduino_Core_STM32)  
+We cloned version [1.9.0-46-g9c457e49](https://github.com/stm32duino/Arduino_Core_STM32/commit/9c457e49790c4cf2b42e4cc5e70f4226d0d7e155)  
 Unpack it under the root of the toolchain, and rename the folder to Arduino_Core_STM32, removing the master at the end.  
 
 ### CMSIS_5
@@ -106,6 +107,7 @@ To use semihosting following needs to be done:
 - add ```extern "C" void initialise_monitor_handles(void);``` to the beginning of the sketch.
 - add a call to ```initialise_monitor_handles();```  to the setup function.
 Launch.json is already configured to use semihosting. Only the ```target``` and the ```device``` need to be set.
+- for a BluePill F103 pin PB3 it the SWO output (connect it to CN4-6 from a stlink seperated from a nucleo board)
 
 
 ### Useful commands
